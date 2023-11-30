@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "g_autho",
+    "slug": "g_autho",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ],
+    "android": {
+      "package": "com.ani.reactauthgoogleexpo",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a6b7c43c-bb90-4f2b-8057-8044e74f4949"
+      }
+    }
+  }
+}
