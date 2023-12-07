@@ -6,18 +6,19 @@ import Inventory from './src/pages/Inventory_Display';
 import Form from './src/pages/Form';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { LinearGradient } from 'expo-linear-gradient';
+import Login from './src/pages/Login';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     
     <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home' screenOptions={{
+      <Stack.Navigator initialRouteName='Login' screenOptions={{
     headerShown: false,
   }}>
             <Stack.Screen name="Form"  options={{ title: 'Form' }} component={Form} />
         <Stack.Screen  name="Home"  options={{ title: 'Inventory' }} component={Inventory} />
+        <Stack.Screen  name="Login"  options={{ title: 'Login' }} component={Login} />
       </Stack.Navigator>
     </NavigationContainer></Provider>
   );

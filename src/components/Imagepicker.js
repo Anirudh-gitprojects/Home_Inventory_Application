@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View,Button ,Image,TouchableOpacity} from 'react-native';
-import {Ionicons} from '@expo/vector-icons'
+import { Alert, ScrollView, StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native';
+
 import {launchCameraAsync,useCameraPermissions,PermissionStatus,launchImageLibraryAsync } from 'expo-image-picker';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';import { useEffect } from 'react';
@@ -65,19 +64,22 @@ function ImagePicker({setImageval}){
         }
         return true;
     }
-    let imagePicked=<Text style={{textAlign:'center'}}>Choose an image</Text>
+    let imagePicked=<Text style={{textAlign:'center',color:'white'}}>Choose an image</Text>
     if(imagePicked)<Text><AddButton onPress={takeImageHandler}/></Text>
     if (image){
         imagePicked=<Image source={{uri:image}} style={styles.image}/>
-        setImageVal=image
+        
     }
     return(
       <ScrollView>
   
             <View style={styles.inputContainer}>
-            <View style={styles.cameraContainer}><TouchableOpacity onPress={takeImageHandler}><Fontisto style={styles.cameraIcon} name="camera" size={24} color="black" /></TouchableOpacity>
-            <Text style={{padding:4}}>Take Image</Text></View>
-            <View style={styles.pickImage}><TouchableOpacity onPress={pickImageAsync}><MaterialCommunityIcons style={styles.imageIcon} name="file-upload" size={30} color="black" /></TouchableOpacity><Text>Upload Image</Text></View>
+            
+            <View style={styles.cameraContainer}><TouchableOpacity onPress={takeImageHandler}><Fontisto style={styles.cameraIcon} name="camera" size={24} color="white" /></TouchableOpacity>
+            <Text style={{padding:4,color:'white'}}>Take Image</Text></View>
+            <View style={styles.imageContainer}>{imagePicked}</View>
+            <View style={styles.pickImage}><TouchableOpacity onPress={pickImageAsync}><MaterialCommunityIcons style={styles.imageIcon} name="file-upload" size={30} color="white" /></TouchableOpacity><Text style={{color:'white'}}>Upload Image</Text></View>
+        
         </View>
       
     
@@ -99,15 +101,17 @@ const styles = StyleSheet.create({
   cameraIcon:{
     borderWidth:1,
     padding:10,
-    borderRadius:50 
+    borderRadius:50,
+    borderColor:"gray"
   },
   imageIcon:{
     borderWidth:1,
     padding:10,
-    borderRadius:50 
+    borderRadius:50,
+    borderColor:"gray"
   },
   pickImage:{
-    marginHorizontal:100,
+    
  
     borderRadius:50,
     height:'100%',
@@ -115,6 +119,7 @@ const styles = StyleSheet.create({
     flexGrow:1,
     justifyContent:'center',
     alignItems:'center',
+  
   },
   addBtn:{
     border:1,
@@ -131,6 +136,7 @@ const styles = StyleSheet.create({
     width:100,
     height:100,
     borderWidth:1,
+    borderColor:'white',
     alignSelf:'center',
     justifyContent:'center',
     alignItems:'center',

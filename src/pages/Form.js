@@ -1,15 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View ,Modal, TouchableHighlight, TouchableOpacity} from 'react-native';
+
+import { ScrollView, StyleSheet, Text, View ,Modal, TouchableOpacity} from 'react-native';
 import Title from '../components/Title';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import InputField from '../components/Input';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ImagePicker from '../components/Imagepicker';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch,useSelector } from 'react-redux';
-import { addItem,removeItem } from '../../redux/itemSlice';
+import { addItem } from '../../redux/itemSlice';
 import {LinearGradient} from 'expo-linear-gradient'
 import ExitButton from '../components/exit';
+
+
 let async_array=[]
 export default function Form({modalVisible,closeModal}) {
   const navigation=useNavigation();
@@ -25,7 +26,7 @@ export default function Form({modalVisible,closeModal}) {
 
 
   function addToReducer(){
-    if(!image || !name || !date || !expectedDate || !contract){
+    if(!image || !name || !date || !expectedDate || !contract || contract==NaN  ){ 
       alert('Required fields cannot be empty!')}
     else{
     dispatch(addItem( { image: image,name:name,date:date,expectedDate:expectedDate,contract:contract}));
@@ -40,37 +41,43 @@ export default function Form({modalVisible,closeModal}) {
     closeModal();
   }
   return (
-    <LinearGradient  colors={['#20002c', '#cbb4d4']}>
-   <Modal propagateSwipe animationType='slide' visible={modalVisible}>
-    
-          <ScrollView>
+   
+   <Modal   propagateSwipe animationType='slide' visible={modalVisible}>
+ <LinearGradient  colors={['#cbb4d4','#20002c']}>
+          <ScrollView >
           <ExitButton style={styles.exitBtn}  onPress={closeModalVisibility}/>
           <View style={styles.container} >
-      <Title title="Add Items"/>
+      <Title title="Add Items" colour="black" border="black" backgroundColor="white" />
+  
       <View style={styles.btnContainer}>
-      <InputField placeholder="Enter name" label="Item name *" value={name}  setValue={setName} />
+      <InputField placeholder="Enter name" label="Item name *" value={name}  setValue={setName} autoCapitalize="words" />
       <InputField placeholder="Enter Installment Date" label="Installment Date *" value={date}   setValue={setDate}  />
-      <InputField placeholder="Enter Maintenance Date" label="Expected Maintenance Date *"  value={expectedDate}   setValue={setExpectedDate} />
-      <InputField placeholder="Enter contact" label="Contractor contact (optional)"  value={contract}   setValue={setContract} /></View>
+      <InputField placeholder="Enter Maintenance Date" label="Expected Maintenance Date *"    value={expectedDate}   setValue={setExpectedDate} />
+      <InputField placeholder="Enter contact" label="Contractor contact (optional)"  keyboardType="number-pad"  value={contract}   setValue={setContract} /></View>
     
       <ImagePicker setImageval={setImage} />
-      <TouchableOpacity style={styles.submitBtn} onPress={addToReducer}><Text style={{color:'black',fontWeight:'bold'}}>Add Item</Text></TouchableOpacity>
-    </View></ScrollView></Modal></LinearGradient>
+      <TouchableOpacity style={styles.submitBtn} onPress={addToReducer}><Text style={{color:'white',fontWeight:'bold'}}>ADD</Text></TouchableOpacity>
+    </View></ScrollView></LinearGradient></Modal>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:'center',
+    alignItems:'center',  
 
+    
+    marginVertical:20
+  
   },
   submitBtn:{
     borderWidth:1,
-    backgroundColor:'white',
+    backgroundColor:'#20002c',
     padding:10,
-    margin:10,
-    width:'30%',
+    borderColor:'white',
+    
+    width:'20%',
+  
     textAlign:'center',
     alignItems:'center',
     borderRadius:20
@@ -78,7 +85,7 @@ const styles = StyleSheet.create({
   exitBtn:{
     alignSelf:'flex-end',
     margin:5,
-    padding:20
+    padding:20,
     
   }
   

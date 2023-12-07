@@ -1,22 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function Title({title}) {
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function Title({title,colour,backgroundColor,border}) {
+  console.log(colour)
+
   return (
     <View style>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title,{color:`${colour}`,backgroundColor:backgroundColor,borderColor:border}]}>{title}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   title: {
-    color:'white',
+
     fontSize:25,
     borderWidth:2,
+    marginBottom:10,
     padding:10,
     borderRadius:20,
-    borderColor:'white',
+
     width:200,
     textAlign:'center'
   },

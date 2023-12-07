@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+
+import { Pressable, StyleSheet,View } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 
 export default function AddButton({onPress}) {

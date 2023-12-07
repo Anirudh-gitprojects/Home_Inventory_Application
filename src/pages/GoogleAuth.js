@@ -1,32 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert,Dimensions} from "react-native";
+import { AntDesign } from '@expo/vector-icons';
 import {
   GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
 } from "@react-native-google-signin/google-signin";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import Home from "./Inventory_Display";
+var {height} = Dimensions.get('window');
 
 // npx expo install @react-native-google-signin/google-signin
 // npx expo install expo-dev-client
 
-export default function App() {
+export default function GoogleAuth() {
   const [error, setError] = useState();
   const [userInfo, setUserInfo] = useState();
-
+ const navigation=useNavigation();
   const configureGoogleSignIn = () => {
     GoogleSignin.configure({
 
       androidClientId:
         "947458477697-vhi5ndj2qslvgop5q4hu4s1in2q4okih.apps.googleusercontent.com",
-
+      iosClientId:"[ios-id here]"
     });
   };
 
   useEffect(() => {
     configureGoogleSignIn();
   });
-
+  
   const signIn = async () => {
     console.log("Pressed sign in");
 
@@ -36,7 +38,7 @@ export default function App() {
       setUserInfo(userInfo);
       setError();
     } catch (e) {
-      setError(e);
+      Alert.alert('Erorr Message','Sign in canceled.')
     }
   };
 
@@ -48,17 +50,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{JSON.stringify(error)}</Text>
-      {userInfo && <Text>{JSON.stringify(userInfo.user)}</Text>}
+
       {userInfo ? (
-        <Button title="Logout" onPress={logout} />
+        <>
+        <Home logout={logout} userInfo={userInfo}/>
+        </>
       ) : (
-        <GoogleSigninButton
-          size={GoogleSigninButton.Size.Standard}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={signIn}
-        />
+        <TouchableOpacity
+          style={styles.googleBtn}
+          onPress={signIn}>
+        
+        <View style={styles.btnDisplay}><Text style={styles.text}>Sign in with</Text><AntDesign name="google" size={24} color="black" /></View></TouchableOpacity>
       )}
+
       <StatusBar style="auto" />
     </View>
   );
@@ -66,9 +70,35 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+  
+    alignItems: "center", 
     justifyContent: "center",
+    flex:height
   },
+  btnDisplay:{
+    flexDirection:'row',
+    justifyContent:'space-evenly'
+  },
+  logout:{
+    marginBottom:0,
+    marginTop:65,
+    alignSelf:'flex-end'
+  },
+  text:{
+   
+    color:'black',
+    marginLeft:50,
+    fontSize:16,
+    alignSelf:'center',
+  
+  },
+  googleBtn:{
+    borderWidth:1,
+    justifyContent:'center',
+    width:300,
+    borderRadius:20,
+    height:50,
+    backgroundColor:'ghostwhite',
+
+  }
 });

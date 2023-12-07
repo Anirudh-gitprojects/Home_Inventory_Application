@@ -15,10 +15,12 @@
       "**/*"
     ],
     "ios": {
+      "useAppleSignIn":true,
       "supportsTablet": true
     },
     "plugins": [
-      "@react-native-google-signin/google-signin"
+      "@react-native-google-signin/google-signin",
+      "expo-apple-authentication"
     ],
     "android": {
       "package": "com.ani.reactauthgoogleexpo",

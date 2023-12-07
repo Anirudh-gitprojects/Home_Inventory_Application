@@ -1,5 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import {Ionicons} from '@expo/vector-icons'
+import { Pressable, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';export default function AddButton({onPress,style}) {
   return (
 
