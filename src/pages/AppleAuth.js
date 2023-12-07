@@ -1,5 +1,5 @@
-import * as AppleAuthentication from 'expo-apple-authentication';
-import { View, StyleSheet } from 'react-native';
+import * as AppleAuthentication from "expo-apple-authentication";
+import { View, StyleSheet } from "react-native";
 
 export default function Apple_Auth() {
   return (
@@ -19,7 +19,7 @@ export default function Apple_Auth() {
             });
             // signed in
           } catch (e) {
-            if (e.code === 'ERR_REQUEST_CANCELED') {
+            if (e.code === "ERR_REQUEST_CANCELED") {
               // handle that the user canceled the sign-in flow
             } else {
               // handle other errors
@@ -34,8 +34,8 @@ export default function Apple_Auth() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     width: 200,
